@@ -7,7 +7,6 @@ td-cards {
 td-card {
   position: absolute;
   left: 50%;
-
 }
 
 .leads-count {
@@ -16,6 +15,7 @@ td-card {
 
 .list.card {
   display: block;
+  position: relative
   margin-top: 80px;
   margin-bottom: 40px;
   margin-left: -150px;

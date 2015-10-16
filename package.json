@@ -23,5 +23,9 @@
   ],
   "cordovaPlatforms": [
     "ios"
-  ]
+  ],
+  "scripts": {
+    "preinstall": "npm install -g cordova ionic gulp bower",
+    "postinstall": "bower install"
+  }
 }

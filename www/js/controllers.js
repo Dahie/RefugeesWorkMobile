@@ -38,17 +38,11 @@ angular.module('starter.controllers', ['ionic.contrib.ui.tinderCards'])
     newCard.id = Math.random();
     $scope.leads.push(angular.extend({}, newCard));
   }
-})
-
-.controller('CardCtrl', function($scope, TDCardDelegate) {
   $scope.cardSwipedLeft = function(index, lead) {
     console.log('LEFT SWIPE');
-    //$scope.addCard();
-
   };
   $scope.cardSwipedRight = function(index, lead) {
     console.log('RIGHT SWIPE');
-    //$scope.addCard();
     $scope.approve(lead);
   };
 })

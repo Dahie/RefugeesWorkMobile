@@ -18,8 +18,8 @@
 
       <div class="col">
         <td-cards>
-          <td-card ng-repeat="lead in leads" on-destroy="skip($index)" on-swipe-left="cardSwipedLeft($index, lead)" on-swipe-right="cardSwipedRight($index, lead)" on-partial-swipe="cardPartialSwipe(amt)" class="card-{{$index}}">
-            <div class="list card image" >
+          <td-card ng-repeat="lead in leads"  on-destroy="skip($index)" on-swipe-left="cardSwipedLeft($index, lead)" on-swipe-right="cardSwipedRight($index, lead)" on-partial-swipe="cardPartialSwipe(amt)" class="card-{{$index}}">
+            <div class="list card image">
               <div class="item item-avatar">
                 <h2>{{lead.name}}</h2>
                 <p>{{lead.created_at}}</p>
