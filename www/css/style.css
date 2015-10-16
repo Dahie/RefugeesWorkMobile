@@ -7,15 +7,25 @@ td-cards {
 td-card {
   position: absolute;
   left: 50%;
+
+}
+
+.leads-count {
+  text-align: center;
+}
+
+.list.card {
+  display: block;
   margin-top: 80px;
   margin-bottom: 40px;
   margin-left: -150px;
   width: 300px;
-  height: 300px;
 
-  border: 1px solid #999;
   box-shadow: 0px 1px 3px rgba(0,0,0,0.2);
   border-radius: 6px;
+  .item-body {
+    height: 200px;
+  }
 }
 /*
 td-card.card-0 {
@@ -35,11 +45,6 @@ td-card.card-2 {
   z-index: 8;
 }
 */
-
-td-card .image {
-  position: relative;
-  background-color: red;
-}
 
 td-card img {
   max-width: 100%;

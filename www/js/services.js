@@ -1,50 +1,77 @@
 angular.module('starter.services', [])
 
-.factory('Leads', function() {
-  // Might use a resource here that returns a JSON array
+angular.module('starter.services', [])
 
-  // Some fake testing data
-  var leads = [{
-    id: 0,
-    name: 'Ben Sparrow',
-    lastText: 'You on your way?',
-    face: 'https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png'
-  }, {
-    id: 1,
-    name: 'Max Lynx',
-    lastText: 'Hey, it\'s me',
-    face: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460'
-  }, {
-    id: 2,
-    name: 'Adam Bradleyson',
-    lastText: 'I should buy a boat',
-    face: 'https://pbs.twimg.com/profile_images/479090794058379264/84TKj_qa.jpeg'
-  }, {
-    id: 3,
-    name: 'Perry Governor',
-    lastText: 'Look at my mukluks!',
-    face: 'https://pbs.twimg.com/profile_images/598205061232103424/3j5HUXMY.png'
-  }, {
-    id: 4,
-    name: 'Mike Harrington',
-    lastText: 'This is wicked good ice cream.',
-    face: 'https://pbs.twimg.com/profile_images/578237281384841216/R3ae1n61.png'
-  }];
+.factory('User', ["$timeout", "$http", function($timeout, $http, ENDPOINT_URI) {
+  var path = 'v1/auth/';
+  #var ref = new Firebase('https://amber-fire-7765.firebaseio.com/');
+  var auth = $firebaseSimpleLogin(ref);
+  var user = {};
 
   return {
-    all: function() {
-      return leads;
-    },
-    remove: function(lead) {
-      leads.splice(leads.indexOf(lead), 1);
-    },
-    get: function(leadId) {
-      for (var i = 0; i < leads.length; i++) {
-        if (leads[i].id === parseInt(leadId)) {
-          return leads[i];
+    login: function(email, password, callback) {
+      auth.$login('password', {
+        email: email,
+        password: password,
+        rememberMe: false
+      }).then(function(res) {
+        user = res;
+        if (callback) {
+          $timeout(function() {
+            callback(res);
+          });
         }
-      }
-      return null;
+      }, function(err) {
+        callback(err);
+      });
+    },
+    register: function(email, password, callback) {
+      auth.$createUser(email, password).then(function(res) {
+        user = res;
+        if (callback) {
+          callback(res);
+        }
+      }, function(err) {
+        callback(err);
+      });
+    },
+    getUser: function() {
+      return user;
+    },
+    logout: function() {
+      auth.$logout();
+      user = {};
+    }
+  }
+
+}])
+
+.factory('Leads', function($http, ENDPOINT_URI) {
+  var path = 'v1/leads/';
+
+  function getUrl() {
+    return ENDPOINT_URI + path;
+  }
+
+  function getUrlForId(itemId) {
+    return getUrl() + itemId;
+  }
+
+  return {
+    all: function () {
+      return $http.get(getUrl());
+    },
+    get: function (itemId) {
+      return $http.get(getUrlForId(itemId));
+    },
+    create: function (item) {
+      return $http.post(getUrl(), item);
+    },
+    update: function (itemId, item) {
+      return $http.put(getUrlForId(itemId), item);
+    },
+    destroy: function (itemId) {
+      return $http.delete(getUrlForId(itemId));
     }
   };
 });

@@ -11,26 +11,45 @@ angular.module('starter.controllers', ['ionic.contrib.ui.tinderCards'])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-  $scope.leads = Leads.all();
-  $scope.remove = function(lead) {
-    Leads.remove(lead);
+  $scope.approved_leads = [];
+
+  function getLeads() {
+      Leads.all()
+        .then(function (result) {
+          $scope.leads = result.data['leads'];
+          $scope.new_leads = result.data['leads'];
+        });
+    }
+
+  getLeads();
+  $scope.skip = function(lead) {
+    $scope.new_leads.pop(lead);
+  };
+  $scope.approve = function(lead) {
+    console.log(lead);
+    $scope.approved_leads.push(lead);
+  };
+  $scope.destroy = function(lead) {
+    Leads.destroy(lead);
   };
 
   $scope.addCard = function() {
-    var newCard = Leads.all()[Math.floor(Math.random() * cardTypes.length)];
+    var newCard = leads[Math.floor(Math.random() * leads.length)];
     newCard.id = Math.random();
-    $scope.cards.push(angular.extend({}, newCard));
+    $scope.leads.push(angular.extend({}, newCard));
   }
 })
 
 .controller('CardCtrl', function($scope, TDCardDelegate) {
-  $scope.cardSwipedLeft = function(index) {
+  $scope.cardSwipedLeft = function(index, lead) {
     console.log('LEFT SWIPE');
-    $scope.addCard();
+    //$scope.addCard();
+
   };
-  $scope.cardSwipedRight = function(index) {
+  $scope.cardSwipedRight = function(index, lead) {
     console.log('RIGHT SWIPE');
-    $scope.addCard();
+    //$scope.addCard();
+    $scope.approve(lead);
   };
 })
 

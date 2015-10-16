@@ -1,26 +1,56 @@
-<ion-view view-title="Leads" no-scroll>
-  <ion-content>
-    <!--<ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="lead in leads" type="item-text-wrap" href="#/tab/leads/{{lead.id}}">
+<ion-view view-title="Leads">
+  <ion-content  scroll="false">
 
-      </ion-item>
-    </ion-list>-->
 
-      <td-cards>
-        <td-card ng-repeat="lead in leads" on-destroy="remove($index)" on-swipe-left="cardSwipedLeft($index)" on-swipe-right="cardSwipedRight($index)" on-partial-swipe="cardPartialSwipe(amt)" class="card-{{$index}}">
-          <div class="image" ng-controller="CardCtrl">
-            <div class="no-text">NOPE</div>
-            <div class="yes-text">LIKE</div>
-            <img ng-src="{{lead.face}}">
-            <h2>{{lead.name}}</h2>
-            <p>{{lead.lastText}}</p>
-            <i class="icon ion-chevron-right icon-accessory"></i>
+    <div class="leads-count padding" ng-show="new_leads.length">{{new_leads.length}} verbleiben</div>
+    <div class="leads-count padding" ng-show="approved_leads.length">{{approved_leads.length}} behalten</div>
 
-            <ion-option-button class="button-assertive" ng-click="remove(lead)">
-              Return
-            </ion-option-button>
-          </div>
-        </td-card>
-      </td-cards>
+    <div class="row">
+
+      <div class="col col-10">
+        <ion-list>
+          <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="lead in approved_leads" type="item-text-wrap" href="#/tab/leads/{{lead.id}}">
+            <p>{{lead.business_type}}</p>
+          </ion-item>
+        </ion-list>
+      </div>
+
+
+      <div class="col">
+        <td-cards>
+          <td-card ng-repeat="lead in leads" on-destroy="skip($index)" on-swipe-left="cardSwipedLeft($index, lead)" on-swipe-right="cardSwipedRight($index, lead)" on-partial-swipe="cardPartialSwipe(amt)" class="card-{{$index}}">
+            <div class="list card image" >
+              <div class="item item-avatar">
+                <h2>{{lead.name}}</h2>
+                <p>{{lead.created_at}}</p>
+              </div>
+              <div class="item item-body">
+                <h2>{{lead.business_type}}</h2>
+                <p>{{lead.description}}</p>
+              </div>
+              <div class="item  tabs tabs-secondary tabs-icon-left">
+                <!--<ion-option-button class="button-assertive" ng-click="skip(lead)">
+                  Return
+                </ion-option-button>
+                <ion-option-button class="button-assertive" ng-click="approve(lead)">
+                  Keep
+                </ion-option-button>-->
+              </div>
+              <!--<div class="no-text">NOPE</div>
+              <div class="yes-text">LIKE</div>-->
+            </div>
+          </td-card>
+        </td-cards>
+      </div>
+
+      <div class="col col-10">
+        <ion-list>
+          <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="lead in approved_leads" type="item-text-wrap" href="#/tab/leads/{{lead.id}}">
+            <h2>{{lead.business_type}}</h2>
+          </ion-item>
+        </ion-list>
+      </div>
+
+    </div>
   </ion-content>
 </ion-view>
