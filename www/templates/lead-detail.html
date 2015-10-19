@@ -6,9 +6,25 @@
 -->
 <ion-view view-title="{{lead.name}}">
   <ion-content class="padding">
-    <img ng-src="{{lead.face}}" style="width: 64px; height: 64px">
-    <p>
-      {{lead.lastText}}
-    </p>
+    <div class="list card image">
+      <div class="item item-avatar">
+        <h2>{{lead.name}}</h2>
+        <p>{{lead.created_at}}</p>
+      </div>
+      <div class="item item-body">
+        <h2>{{lead.business_type}}</h2>
+        <p>{{lead.description}}</p>
+      </div>
+      <div class="item  tabs tabs-secondary tabs-icon-left">
+        <!--<ion-option-button class="button-assertive" ng-click="skip(lead)">
+          Return
+        </ion-option-button>
+        <ion-option-button class="button-assertive" ng-click="approve(lead)">
+          Keep
+        </ion-option-button>-->
+      </div>
+      <!--<div class="no-text">NOPE</div>
+      <div class="yes-text">LIKE</div>-->
+    </div>
   </ion-content>
 </ion-view>

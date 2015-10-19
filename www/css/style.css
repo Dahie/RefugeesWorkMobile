@@ -13,7 +13,7 @@ td-card {
   text-align: center;
 }
 
-.list.card {
+td-cards .list.card {
   display: block;
   position: relative
   margin-top: 80px;

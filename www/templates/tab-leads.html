@@ -2,14 +2,16 @@
   <ion-content  scroll="false">
 
 
-    <div class="leads-count padding" ng-show="new_leads.length">{{new_leads.length}} verbleiben</div>
-    <div class="leads-count padding" ng-show="approved_leads.length">{{approved_leads.length}} behalten</div>
+    <div class="padding leads-count">
+      <span ng-show="new_leads.length">{{new_leads.length}} verbleiben</span>
+      <span ng-show="approved_leads.length">{{approved_leads.length}} behalten</span>
+    </div>
 
     <div class="row">
 
       <div class="col col-10">
         <ion-list>
-          <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="lead in approved_leads" type="item-text-wrap" href="#/tab/leads/{{lead.id}}">
+          <ion-item class="item-remove-animate" ng-repeat="lead in approved_leads" type="item-text-wrap" href="#/tab/leads/{{lead.id}}">
             <p>{{lead.business_type}}</p>
           </ion-item>
         </ion-list>
@@ -45,7 +47,7 @@
 
       <div class="col col-10">
         <ion-list>
-          <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="lead in approved_leads" type="item-text-wrap" href="#/tab/leads/{{lead.id}}">
+          <ion-item class="item-add-animate" ng-repeat="lead in approved_leads" type="item-text-wrap" href="#/tab/leads/{{lead.id}}">
             <h2>{{lead.business_type}}</h2>
           </ion-item>
         </ion-list>

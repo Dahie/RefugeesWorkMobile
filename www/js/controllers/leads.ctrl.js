@@ -1,7 +1,4 @@
-angular.module('starter.controllers', ['ionic.contrib.ui.tinderCards'])
-
-.controller('DashCtrl', function($scope) {})
-
+angular.module('refugees-work-mobile.controllers')
 .controller('LeadsCtrl', function($scope, Leads) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -14,12 +11,12 @@ angular.module('starter.controllers', ['ionic.contrib.ui.tinderCards'])
   $scope.approved_leads = [];
 
   function getLeads() {
-      Leads.all()
-        .then(function (result) {
-          $scope.leads = result.data['leads'];
-          $scope.new_leads = result.data['leads'];
-        });
-    }
+    Leads.all()
+      .then(function (result) {
+        $scope.leads = result.data['leads'];
+        $scope.new_leads = result.data['leads'];
+      });
+  }
 
   getLeads();
   $scope.skip = function(lead) {
@@ -32,7 +29,6 @@ angular.module('starter.controllers', ['ionic.contrib.ui.tinderCards'])
   $scope.destroy = function(lead) {
     Leads.destroy(lead);
   };
-
   $scope.addCard = function() {
     var newCard = leads[Math.floor(Math.random() * leads.length)];
     newCard.id = Math.random();
@@ -46,13 +42,13 @@ angular.module('starter.controllers', ['ionic.contrib.ui.tinderCards'])
     $scope.approve(lead);
   };
 })
-
 .controller('LeadDetailCtrl', function($scope, $stateParams, Leads) {
-  $scope.lead = Leads.get($stateParams.leadId);
+  function getLead() {
+    Leads.get($stateParams.leadId)
+      .then(function (result) {
+        console.log(result);
+        $scope.lead = result.data;
+      });
+  }
+  getLead();
 })
-
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
-});

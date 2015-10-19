@@ -1,0 +1,35 @@
+{
+  "return_reasons": [
+    {
+      "product_group": "shirts",
+      "top_reasons": [
+        { "name": "too_short_blue" },
+        { "name": "too_short_orange"},
+        { "name": "too_wide"},
+        { "name": "too_long"}
+      ],
+      "additional_reasons": [
+        {
+          "name": "too_narrow",
+          "details": [
+            { "name": "waist" },
+            { "name": "hip" },
+            { "name": "leg" }
+          ]
+        },
+        {
+          "name": "too_long",
+          "details": []
+        },
+        {
+          "name": "color",
+          "details": [
+            { "name": "red" },
+            { "name": "blue" },
+            { "name": "yellow" }
+          ]
+        }
+      ]
+    }
+  ]
+}

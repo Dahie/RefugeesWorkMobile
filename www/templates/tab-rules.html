@@ -1,0 +1,33 @@
+<ion-view view-title="Return Reasons">
+  <ion-content>
+    <ion-list>
+      <ion-checkbox class="item-icon-right"
+                    ng-repeat="reason in top_return_reasons"
+                    ng-model="reason.checked"
+                    ng-checked="reason.checked"
+                    type="item-text-wrap">
+        {{reason.name}}
+      </ion-checkbox>
+      <ion-item class="item-stable"
+                ng-click="toggleAdditionals()"
+                ng-class="{active: areAdditionalsShown()}">
+          <i class="icon" ng-class="areAdditionalsShown() ? 'ion-minus' : 'ion-plus'"></i>
+        &nbsp;
+        Additional Reasons
+      </ion-item>
+      <ion-checkbox class="item-accordion item-icon-right"
+                    ng-repeat="reason in additional_return_reasons"
+                    ng-model="reason.checked"
+                    ng-checked="reason.checked"
+                    type="item-text-wrap"
+                    ng-show="areAdditionalsShown()"
+                    ng-click="showDetailsReasonsPopup(reason.checked)">
+        {{reason.name}}
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </ion-checkbox>
+    </ion-list>
+    <div class="padding">
+      <button class="button button-block button-positive activated">Next</button>
+    </div>
+  </ion-content>
+</ion-view>
