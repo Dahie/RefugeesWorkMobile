@@ -1,5 +1,5 @@
 angular.module('refugees-work-mobile.controllers')
-.controller('ReturnReasonsCtrl', function($scope, $ionicPopup, ReturnReasons) {
+.controller('ReturnReasonsCtrl', function($scope, $state, $ionicPopup, $stateParams, $ionicHistory, ReturnReasons) {
 
   function getReturnReasons() {
     ReturnReasons.all()
@@ -21,6 +21,13 @@ angular.module('refugees-work-mobile.controllers')
   };
   $scope.areAdditionalsShown = function() {
     return $scope.showAdditionals;
+  };
+
+  $scope.next = function() {
+    $ionicHistory.nextViewOptions({
+      disableBack: true
+    });
+    $state.go('tab.leads');
   };
 
   $scope.showDetailsReasonsPopup = function(checkDetailReasons) {

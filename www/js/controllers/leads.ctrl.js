@@ -1,5 +1,5 @@
 angular.module('refugees-work-mobile.controllers')
-.controller('LeadsCtrl', function($scope, Leads) {
+.controller('LeadsCtrl', function($scope, $state, $ionicHistory, Leads) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -23,8 +23,11 @@ angular.module('refugees-work-mobile.controllers')
     $scope.new_leads.pop(lead);
   };
   $scope.approve = function(lead) {
-    console.log(lead);
     $scope.approved_leads.push(lead);
+    $ionicHistory.nextViewOptions({
+      disableBack: true
+    });
+    $state.go('tab.rules', {leadId: lead.id});
   };
   $scope.destroy = function(lead) {
     Leads.destroy(lead);
